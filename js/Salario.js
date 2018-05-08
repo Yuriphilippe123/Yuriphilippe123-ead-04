@@ -8,7 +8,7 @@ class Salario {
         //DEFININDO COMO TIPO INDEFINIDO
         this._salarioBruto = undefined;
         this._descontoINSS = undefined;
-        this._descontoIRRF = undefined;
+        this._descontoIRPF = undefined;
         
         //CONTINUAÇÃO
         this._validarRegras(SalarioBruto);
@@ -57,32 +57,32 @@ class Salario {
         // INICIO DO CALCULO DO IMPOSTO DE RENDA
 
         if(this._baseDescontoIR <= 1903.98){
-            this._descontoIRRF = 0.00;
-            this._debitoIR = 0;
-            return this._descontoIRRF;
+            this._descontoIRPF = 0.00;
+            
+            return this._descontoIRPF;
         }
         else{
-            if(this._baseDescontoIR <= 2826.65 && ( this._baseDescontoIR <= 2826.65)){
-                this._descontoIRRF = this._baseDescontoIR * (7.5/100)
-                this. _debitoIR = this._descontoIRRF - 142.80
-                return this._descontoIRRF;
+            if(this._baseDescontoIR > 1903.98 && ( this._baseDescontoIR <= 2826.65)){
+                this._descontoIRPF = this._baseDescontoIR * (7.5/100) - 142.80;
+                
+                return this._descontoIRPF;
             }
             else{
-                if(this._baseDescontoIR <=3751.05){
-                    this._descontoIRRF = this._descontoIRRF * (15.00/100)
-                    _debitoIR = this._baseDescontoIR - 354.80
-                    return this._descontoIRRF;
+                if(this._baseDescontoIR >2826.65 &&  this._baseDescontoIR <= 3751.05){
+                    this._descontoIRPF = this._baseDescontoIR * (15.0/100) - 354.80;
+                    
+                    return this._descontoIRPF;
                 }
                 else{
-                    if(this._baseDescontoIR <=4664.68){
-                        this._descontoIRRF = this._baseDescontoIR * (22.5/100)
-                        _debitoIR = this._descontoIRRF - 636.13
-                        return this._descontoIRRF;
+                    if(this._baseDescontoIR >3751.05 && ( this._baseDescontoIR <= 4664.68)){
+                        this._descontoIRPF = this._baseDescontoIR * (22.5/100) - 636.13;
+                        
+                        return this._descontoIRPF;
                     }
                     else{
-                        this._descontoIRRF = this._baseDescontoIR * (27.5/100)
-                        _debitoIR = this._descontoIRRF - 869.36
-                        return this._descontoIRRF;
+                        this._descontoIRPF = this._baseDescontoIR * (27.5/100) - 869.36;
+                        
+                        return this._descontoIRPF;
                     }
                 }
             }
@@ -92,11 +92,11 @@ class Salario {
 
     //CALCULANDO TOTAL DOS DESCONTOS
     get totalDescontos(){
-        return this._descontoINSS + this._descontoIRRF;
+        return this._descontoINSS + this._descontoIRPF;
     }
     // CALCULANDO O SALARIO LIQUIDO
     get salarioLiquido(){
-        return this._salarioBruto.toFixed(2) - this._descontoINSS.toFixed(2) - this._descontoIRRF.toFixed(2) - this._debitoIR.toFixed(2)
+        return this._salarioBruto.toFixed(2) - this._descontoINSS.toFixed(2)  - this._descontoIRPF.toFixed(2)
         return this.salarioLiquido.toFixed(2);
 
         
